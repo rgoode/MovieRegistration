@@ -8,7 +8,7 @@ namespace MovieRegistration.Models.Movie
     {
 
         //public IEnumerable<Services.DALModels.MovieTable> Movies
-        //public IEnumerable<Services.DALModels.MovieTable> Movies { get; set; }
+        public IEnumerable<Services.DALModels.MovieTable> Movies { get; set; }
 
         public int Id { get; set; }
 
