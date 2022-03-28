@@ -1,21 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MovieRegistration.Models;
+using MovieRegistration.Models.Movie;
+using MovieRegistration.services;
+using Services.DALModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 
 namespace MovieRegistration.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        
+        private readonly MovieContext _movieContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(MovieContext movieContext)
         {
-            _logger = logger;
+            _movieContext = movieContext;
         }
 
         public IActionResult Index()
@@ -23,10 +28,52 @@ namespace MovieRegistration.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult MovieRegister()
         {
-            return View();
+
+                return View();
         }
+
+        [HttpPost]
+        public ActionResult Create(MovieTable newMovie)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var db= new MovieContext();
+                db.Add(newMovie);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(newMovie);
+            }
+        }
+        public IActionResult Result(UserMovieEntry resultView)
+        {
+            var model = new ResultViewModel(resultView.Movie);
+            return View(model);
+        }
+
+
+
+
+        [HttpPost]
+        //public ActionResult Validate(MovieTable movieEntered)
+        //{
+        //    if (Validation.IsValid())
+        //    {
+        //        var Title = Request["Title"];
+        //        var credits = Request["credits"].AsInt();
+        //        var Year = Request["Year"].AsDateTime();
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

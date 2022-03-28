@@ -1,0 +1,45 @@
+﻿
+@model MovieRegistration.Models.Movie.UserMovieEntry
+
+
+
+
+    <div class="MovieRegistration">
+    <form asp-controller="Home" asp-action="Result" asp-route-id="" method="post">
+        <label asp-for="Movie.Title"></label>
+        <input asp-for="Movie.Title">
+        
+
+       <label asp-for="Movie.Year"></label>
+        <input asp-for="Movie.Year" />
+       
+
+        <label asp-for="Movie.Actor"></label>
+        <input asp-for="Movie.Actor" />
+
+        <label asp-for="Movie.Director"></label>
+        <input asp-for="Movie.Director" />
+
+        <label asp-for="Movie.Genre">Genre</label>
+        <div class="dropdown">@Html.DropDownList("Genre", new List<SelectListItem>
+            {
+                new SelectListItem{ Text="Horror", Value = "1"},
+                new SelectListItem{ Text="Comedy", Value = "2"},
+                new SelectListItem{ Text="Romance", Value = "3"},
+                new SelectListItem{ Text="Action", Value = "4"},
+                new SelectListItem{ Text="Animated", Value = "5"},
+                new SelectListItem{ Text="Other", Value = "6"}
+            })
+         </div>
+
+
+       <button type="submit">Submit</button>
+       @* <input id="redirect" type="submit" value="Submit" onclick="Result";" class="btn btn-default" />*@
+    </form>
+</div>
+
+
+
+@*https://localhost:5001/*@
+
+

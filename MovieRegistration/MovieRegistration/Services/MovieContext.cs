@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MovieRegistration.Services.DAL_Models;
+using Services.DALModels;
 
-namespace MovieRegistration.Services
+namespace MovieRegistration.services
 {
     public class MovieContext : DbContext
     {
